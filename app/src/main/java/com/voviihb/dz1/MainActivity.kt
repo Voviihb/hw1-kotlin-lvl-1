@@ -40,8 +40,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         button.setOnClickListener {
-            adapter.items.add(adapter.items.lastIndex + 1)
-            adapter.notifyItemInserted(adapter.items.size - 1)
+            adapter.items.add(adapter.items.size)
+            adapter.notifyItemInserted(adapter.items.lastIndex)
         }
     }
 
