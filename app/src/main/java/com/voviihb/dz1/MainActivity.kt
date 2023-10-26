@@ -14,15 +14,13 @@ class MainActivity : AppCompatActivity() {
         private const val SAVED_STATE_KEY_SIZE = "size"
     }
 
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var button: Button
-    private lateinit var adapter: MainAdapter
+    private var adapter: MainAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        recyclerView = findViewById(R.id.recycler_view)
-        button = findViewById(R.id.button_add)
+        val recyclerView: RecyclerView = findViewById(R.id.recycler_view)
+        val button: Button = findViewById(R.id.button_add)
         adapter = MainAdapter()
 
         recyclerView.adapter = adapter
@@ -35,19 +33,21 @@ class MainActivity : AppCompatActivity() {
 
         savedInstanceState?.let {
             for (i in 0 until it.getInt(SAVED_STATE_KEY_SIZE)) {
-                adapter.items.add(i)
+                adapter?.items?.add(i)
             }
         }
 
         button.setOnClickListener {
-            adapter.items.add(adapter.items.size)
-            adapter.notifyItemInserted(adapter.items.lastIndex)
+            adapter?.let {
+                it.items.add(it.items.size)
+                it.notifyItemInserted(it.items.lastIndex)
+            }
         }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putInt(SAVED_STATE_KEY_SIZE, adapter.itemCount)
+        outState.putInt(SAVED_STATE_KEY_SIZE, adapter?.itemCount ?: 0)
     }
 
 
