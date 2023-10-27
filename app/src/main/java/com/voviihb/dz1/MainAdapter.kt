@@ -7,12 +7,13 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 
+
 class MainAdapter() : RecyclerView.Adapter<MainViewHolder>() {
-    val items: ArrayList<Int> = ArrayList()
+    val items = arrayListOf<Int>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
         return MainViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_layout, null)
+            LayoutInflater.from(parent.context).inflate(R.layout.item_layout, parent, false)
         )
     }
 
