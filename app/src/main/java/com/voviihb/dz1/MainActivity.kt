@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
         private const val SAVED_STATE_KEY_SIZE = "size"
     }
 
-    private var adapter: MainAdapter? = null
+    private var adapter: MainAdapter = MainAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,21 +33,20 @@ class MainActivity : AppCompatActivity() {
 
         savedInstanceState?.let {
             for (i in 0 until it.getInt(SAVED_STATE_KEY_SIZE)) {
-                adapter?.items?.add(i)
+                adapter.items.add(i)
             }
         }
 
         button.setOnClickListener {
-            adapter?.let {
-                it.items.add(it.items.size)
-                it.notifyItemInserted(it.items.lastIndex)
-            }
+            adapter.items.add(adapter.items.size)
+            adapter.notifyItemInserted(adapter.items.lastIndex)
+
         }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putInt(SAVED_STATE_KEY_SIZE, adapter?.itemCount ?: 0)
+        outState.putInt(SAVED_STATE_KEY_SIZE, adapter.itemCount)
     }
 
 
