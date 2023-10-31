@@ -33,6 +33,10 @@ class MainViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val color = if (item % 2 == 0) R.color.red else R.color.blue
         numberTextView.text = item.toString()
         numberTextView.background = ContextCompat.getDrawable(itemView.context, color)
+        numberTextView.setOnClickListener{
+            val intent = ShowInfoActivity.newIntent(itemView.context, item)
+            itemView.context.startActivity(intent)
+        }
     }
 
 }
